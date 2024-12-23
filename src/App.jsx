@@ -5,7 +5,7 @@ import SearchBox from "./components/searchBox/SearchBox";
 import ContactForm from "./components/contactForm/ContactForm";
 import { nanoid } from "nanoid";
 
-const ConntactsExemple = [
+const ContactsExample = [
   { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
   { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
   { id: "id-3", name: "Eden Clements", number: "645-17-79" },
@@ -15,7 +15,7 @@ const ConntactsExemple = [
 function App() {
   const [contacts, setContacts] = useState(() => {
     const savedContacts = localStorage.getItem("contacts");
-    return savedContacts ? JSON.parse(savedContacts) : ConntactsExemple;
+    return savedContacts ? JSON.parse(savedContacts) : ContactsExample;
   });
   const [filter, setFilter] = useState("");
 
