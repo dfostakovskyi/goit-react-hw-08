@@ -1,6 +1,8 @@
+import React from "react";
 import PropTypes from "prop-types";
-import Contact from "../contact/Contact";
+
 import styles from "./contactList.module.css";
+import Contact from "../contact/contact";
 
 function ContactList({ contacts, deleteContact }) {
   return (
