@@ -1,3 +1,8 @@
+@import "normalize.css";
+
+#root {
+  text-align: left;
+}
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -13,6 +18,40 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -23,9 +62,9 @@ a:hover {
 }
 
 body {
-  margin: 0;
   display: flex;
-  place-items: center;
+  padding: 20px;
+
   min-width: 320px;
   min-height: 100vh;
 }
@@ -58,6 +97,7 @@ button:focus-visible {
   :root {
     color: #213547;
     background-color: #ffffff;
+    text-align: left;
   }
   a:hover {
     color: #747bff;
