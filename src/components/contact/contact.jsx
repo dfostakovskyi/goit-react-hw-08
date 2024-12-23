@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import styles from "./contact.module.css";
 import { FaPhone } from "react-icons/fa6";
