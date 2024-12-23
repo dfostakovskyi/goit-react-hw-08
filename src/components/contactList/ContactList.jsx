@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import Contact from "../contact/Contact";
+import Contact from "../contact/contact";
 
 import styles from "./ContactList.module.css";
 
