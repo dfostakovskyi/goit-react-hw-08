@@ -17,6 +17,7 @@ const persistConfig = {
   key: "root",
   storage,
   whitelist: ["contacts"],
+  blacklist: ["filters", "uiState", "register"],
 };
 
 const persistedReducer = persistReducer(persistConfig, contactsReducer);
