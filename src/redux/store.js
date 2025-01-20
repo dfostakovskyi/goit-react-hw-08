@@ -16,7 +16,7 @@ import filtersReducer from "./filtersSlice";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["contacts"],
+  whitelist: ["phoneBook"],
   blacklist: ["filters", "uiState", "register"],
 };
 
