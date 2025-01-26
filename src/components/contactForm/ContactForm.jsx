@@ -3,8 +3,7 @@ import * as Yup from "yup";
 import PropTypes from "prop-types";
 import styles from "./contactForm.module.css";
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contactsSlice";
-import { nanoid } from "@reduxjs/toolkit";
+import { addContact } from "../../redux/contactsSlice"; // Виправлено шлях
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
@@ -12,7 +11,6 @@ export const ContactForm = () => {
 
   const onSubmit = (values, { resetForm }) => {
     const newContact = {
-      id: nanoid(),
       name: values.name,
       number: values.number,
     };
@@ -71,10 +69,6 @@ export const ContactForm = () => {
       </Formik>
     </div>
   );
-};
-
-ContactForm.propTypes = {
-  addContact: PropTypes.func.isRequired,
 };
 
 export default ContactForm;
