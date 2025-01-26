@@ -3,11 +3,12 @@ import * as Yup from "yup";
 import PropTypes from "prop-types";
 import styles from "./contactForm.module.css";
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contactsSlice"; // Виправлено шлях
+import { addContact } from "../../redux/contactsSlice";
+
+const initialValues = { name: "", number: "" };
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
-  const initialValues = { name: "", number: "" };
 
   const onSubmit = (values, { resetForm }) => {
     const newContact = {
