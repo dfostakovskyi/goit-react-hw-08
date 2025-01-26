@@ -2,7 +2,7 @@
 
 import React from "react";
 import styles from "./contact.module.css";
-import { FaPhone, FaUser } from "react-icons/fa"; // Correct icon import
+import { FaPhone, FaUser } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { deleteContact } from "../../redux/contactsSlice";
 
@@ -11,7 +11,7 @@ const Contact = ({ contact }) => {
   const { name, number, id } = contact;
 
   const handleDelete = () => {
-    console.log("Deleting contact ID:", id); // Log contact ID
+    console.log("Deleting contact ID:", id);
     dispatch(deleteContact(id));
   };
 
@@ -19,12 +19,12 @@ const Contact = ({ contact }) => {
     <li className={styles.contactItem}>
       <div className={styles.contactItemInfo}>
         <div className={styles.contactDetails}>
-          <FaUser className={styles.icon} /> {/* Updated icon class */}
+          <FaUser className={styles.icon} />
           <p>{name}</p>
         </div>
 
         <div className={styles.contactDetails}>
-          <FaPhone className={styles.icon} /> {/* Updated icon class */}
+          <FaPhone className={styles.icon} />
           <span>{number}</span>
         </div>
       </div>
