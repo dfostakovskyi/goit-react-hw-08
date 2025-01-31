@@ -4,12 +4,6 @@ import {
   addContact,
   deleteContact,
 } from "../contacts/operations";
-// import {
-//   selectContactsState,
-//   selectContacts,
-//   selectFilters,
-//   selectFilteredContacts,
-// } from "./selectors";
 
 const initialState = {
   items: [],
@@ -56,19 +50,15 @@ const contactsSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       });
+    // .addCase(logout.fulfilled, (state) => {
+    //   state.items = [];
+    // });
   },
 });
 
 export const { changeFilter } = contactsSlice.actions;
 
 export const contactsReducer = contactsSlice.reducer;
-export {
-  fetchContacts,
-  addContact,
-  deleteContact,
-  //   selectContacts,
-  //   selectFilters,
-  //   selectFilteredContacts,
-};
+export { fetchContacts, addContact, deleteContact };
 
 export default contactsReducer;
