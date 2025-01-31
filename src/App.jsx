@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { SearchBox } from "./components/searchBox/SearchBox";
 import { ContactForm } from "./components/contactForm/ContactForm";
-import { addContact, fetchContacts } from "./redux/contactsSlice";
+import { addContact, fetchContacts } from "./redux/contacts/slice";
 import ContactList from "./components/contactList/contactsList";
 import "./App.css";
 

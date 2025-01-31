@@ -1,16 +1,9 @@
-// store.js містить логіку створення redux стейту, а також логіку, пов'язану з налаштуванням redux-persist
-//  Кінцева структура redux стейту має бути наступний об'єкт:
-// {
-//   contacts: { items: [] },
-//   filters: { name: "" }
-// }
-// Назви властивостей contacts та filters формуються в методі configureStore
-// Значення цих властивостей - це initialState слайсів контактів та фільтрів.
+// src/redux/store.js
 
 import { configureStore } from "@reduxjs/toolkit";
 
-import contactsReducer from "./contactsSlice";
-import filtersReducer from "./filtersSlice";
+import contactsReducer from "./contacts/slice";
+import filtersReducer from "./filters/slice";
 
 const store = configureStore({
   reducer: {

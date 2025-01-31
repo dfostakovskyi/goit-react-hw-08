@@ -1,4 +1,4 @@
-//src\redux\filtersSlice.js
+// src\redux\filtersSlice.js
 
 import { createSlice } from "@reduxjs/toolkit";
 

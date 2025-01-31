@@ -1,4 +1,3 @@
-// src\redux\contactsOps.js
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -35,10 +34,10 @@ export const deleteContact = createAsyncThunk(
   "contacts/deleteContact",
   async (contactId, thunkAPI) => {
     try {
-      console.log("Trying to delete contact ID:", contactId); // Log contact ID
+      console.log("Trying to delete contact ID:", contactId);
       const { data } = await axios.delete(`${baseUrl}/${contactId}`);
       console.log("Contact deleted: ", data);
-      return contactId; // Return the ID of the deleted contact
+      return contactId;
     } catch (e) {
       console.error("Error deleting contact: ", e);
       return thunkAPI.rejectWithValue(e.message);

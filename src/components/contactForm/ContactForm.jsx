@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import PropTypes from "prop-types";
 import styles from "./contactForm.module.css";
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contactsSlice";
+import { addContact } from "../../redux/contacts/slice";
 
 const initialValues = { name: "", number: "" };
 
