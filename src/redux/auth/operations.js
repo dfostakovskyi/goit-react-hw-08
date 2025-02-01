@@ -1,51 +1,21 @@
 // src/redux/auth/operations.js
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 import toast from "react-hot-toast";
+import { saveToken, removeToken } from "../../utils/localStorage";
+import goitApi, { setAuthHeader, clearAuthHeader } from "../../api/goitApi";
 
-export const goitApi = axios.create({
-  baseURL: "https://connections-api.goit.global",
-});
-
-export const setAuthHeader = (token) => {
-  goitApi.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
-
-export const saveToken = (token) => {
-  localStorage.setItem("token", token);
-};
-
-export const getToken = () => {
-  return localStorage.getItem("token");
-};
-
-// export const registerThunk = createAsyncThunk(
-//   "auth/register",
-//   async (credentials, thunkApi) => {
-//     try {
-//       const { data } = await goitApi.post("users/signup", credentials);
-//       saveToken(data.token);
-//       setAuthHeader(data.token);
-//       return data;
-//     } catch (error) {
-//       if (error.response && error.response.data.code === 11000) {
-//         toast.error("User already exists!");
-//         return thunkApi.rejectWithValue(error.message);
-//       }
-//       return thunkApi.rejectWithValue(error.message);
-//     }
-//   }
-// );
-
+// Реєстрація користувача
 export const registerThunk = createAsyncThunk(
   "auth/register",
   async (credentials, thunkApi) => {
     try {
       console.log("Sending user data:", credentials);
       const { data } = await goitApi.post("users/signup", credentials);
-      saveToken(data.token);
+
       setAuthHeader(data.token);
+      saveToken(data.token); // Зберігаємо токен, якщо потрібно
+
       return data;
     } catch (error) {
       console.error(
@@ -57,17 +27,17 @@ export const registerThunk = createAsyncThunk(
   }
 );
 
+// Вхід користувача
 export const loginThunk = createAsyncThunk(
   "auth/login",
   async (credentials, thunkApi) => {
     try {
       const { data } = await goitApi.post("users/login", credentials);
       saveToken(data.token);
+      console.log("Token saved:", data.token);
       setAuthHeader(data.token);
 
-      const userData = await goitApi.get("users/current");
-
-      return { ...data, user: userData.data };
+      return data;
     } catch (error) {
       toast.error("Login failed!");
       return thunkApi.rejectWithValue(error.message);
@@ -75,25 +45,40 @@ export const loginThunk = createAsyncThunk(
   }
 );
 
+// Вихід користувача
 export const logoutThunk = createAsyncThunk(
   "auth/logout",
   async (_, thunkApi) => {
     try {
+      console.log("🚀 Logging out...");
+
+      const token = thunkApi.getState().auth.token;
+      console.log("🔑 Current Token:", token);
+
+      if (!token) {
+        console.warn("⚠️ No token found. Skipping logout.");
+        return thunkApi.rejectWithValue("No token found");
+      }
+
+      setAuthHeader(token);
       await goitApi.post("users/logout");
-      localStorage.removeItem("token");
-      delete goitApi.defaults.headers.common.Authorization;
+
+      clearAuthHeader();
+      removeToken();
+
       return "Logged out";
     } catch (error) {
-      toast.error("Logout failed!");
+      console.error("❌ Logout failed:", error);
       return thunkApi.rejectWithValue(error.message);
     }
   }
 );
 
+// Оновлення користувача
 export const refreshUserThunk = createAsyncThunk(
   "auth/refresh",
   async (_, thunkApi) => {
-    const savedToken = getToken();
+    const savedToken = localStorage.getItem("token");
     if (!savedToken) {
       return thunkApi.rejectWithValue("Token does not exist");
     }
@@ -101,11 +86,14 @@ export const refreshUserThunk = createAsyncThunk(
     setAuthHeader(savedToken);
 
     try {
-      const { data } = await goitApi.get("users/login");
+      const { data } = await goitApi.get("users/current");
       return data;
     } catch (error) {
       localStorage.removeItem("token");
+      clearAuthHeader();
       return thunkApi.rejectWithValue(error.message);
     }
   }
 );
+
+export default goitApi;

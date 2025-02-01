@@ -2,11 +2,13 @@
 
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { loginThunk } from "../../redux/auth/operations";
 import LoginForm from "../../components/loginForm/LoginForm";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -21,7 +23,7 @@ const LoginPage = () => {
       .unwrap()
       .then((response) => {
         console.log("Login successful, token:", response.token);
-        // Перенаправлення користувача або інші дії
+        navigate("/contacts");
       })
       .catch((error) => {
         console.error("Login failed:", error);

@@ -1,3 +1,5 @@
+// src/components/appBar/AppBar.jsx
+
 import React from "react";
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from "/src/redux/auth/selectors";
@@ -7,6 +9,7 @@ import AuthNav from "../authNav/AuthNav";
 
 const AppBar = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  console.log("isLoggedIn:", isLoggedIn);
 
   return (
     <header>

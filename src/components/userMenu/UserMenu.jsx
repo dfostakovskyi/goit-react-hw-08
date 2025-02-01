@@ -1,14 +1,31 @@
 // src/components/userMenu/UserMenu.jsx
-
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { logoutThunk } from "../../redux/auth/operations";
+import goitApi from "../../redux/auth/operations";
+
 import css from "./UserMenu.module.css";
+
 const UserMenu = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
 
   const handleLogout = () => {
-    dispatch(logoutThunk());
+    console.log("🔴 Logging out...");
+
+    localStorage.removeItem("token");
+    goitApi.defaults.headers.common["Authorization"] = "";
+
+    dispatch(logoutThunk())
+      .unwrap()
+      .then(() => {
+        console.log("✅ Logout successful");
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error("❌ Logout failed:", error);
+      });
   };
 
   if (!user) {
