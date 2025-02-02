@@ -17,27 +17,27 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {}, // Видаляємо непотрібні `loginSuccess` і `logoutSuccess`
+  reducers: {}, 
   extraReducers: (builder) => {
     builder
       .addCase(registerThunk.fulfilled, (state, action) => {
         state.token = action.payload.token;
         state.user = action.payload.user;
-        state.isLoggedIn = true; // Додаємо, щоб UserMenu відображався
+        state.isLoggedIn = true; 
       })
       .addCase(loginThunk.fulfilled, (state, action) => {
         state.token = action.payload.token;
         state.user = action.payload.user;
-        state.isLoggedIn = true; // Оновлюємо стан
+        state.isLoggedIn = true; 
       })
       .addCase(logoutThunk.fulfilled, (state) => {
         state.token = null;
         state.user = null;
-        state.isLoggedIn = false; // Оновлюємо стан
+        state.isLoggedIn = false; 
       })
       .addCase(refreshUserThunk.fulfilled, (state, action) => {
         state.user = action.payload;
-        state.isLoggedIn = true; // Додаємо, щоб після оновлення UserMenu не зникав
+        state.isLoggedIn = true; 
       })
       .addMatcher(
         (action) => action.type.endsWith("/pending"),

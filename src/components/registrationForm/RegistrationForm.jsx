@@ -107,6 +107,7 @@ export const RegistrationForm = ({ handleSubmit }) => {
         <br />
         At least one uppercase letter
       </p>
+
       <button type="submit" className="btn btn-neutral mt-4">
         Register
       </button>

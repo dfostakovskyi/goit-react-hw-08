@@ -1,8 +1,10 @@
 // src/components/userMenu/UserMenu.jsx
 import { useDispatch, useSelector } from "react-redux";
+import { FaPhone, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { logoutThunk } from "../../redux/auth/operations";
 import goitApi from "../../redux/auth/operations";
+import SearchBox from "../searchBox/SearchBox";
 
 import css from "./UserMenu.module.css";
 
@@ -12,19 +14,16 @@ const UserMenu = () => {
   const user = useSelector((state) => state.auth.user);
 
   const handleLogout = () => {
-    console.log("🔴 Logging out...");
-
     localStorage.removeItem("token");
     goitApi.defaults.headers.common["Authorization"] = "";
 
     dispatch(logoutThunk())
       .unwrap()
       .then(() => {
-        console.log("✅ Logout successful");
         navigate("/");
       })
       .catch((error) => {
-        console.error("❌ Logout failed:", error);
+        console.error("Logout failed:", error);
       });
   };
 
@@ -33,21 +32,11 @@ const UserMenu = () => {
   }
 
   return (
-    <div className={css.userMenu}>
+    <div className="flex items-center gap-4 justify-center">
       <div>Welcome, {user.name}!</div>
       <nav>
-        <ul className="menu menu-vertical lg:menu-horizontal bg-base-200 rounded-box p-2">
-          <li>
-            <div className="flex items-center">
-              <img
-                src={user?.avatar || "/default-avatar.png"}
-                alt="User Avatar"
-                className="w-10 h-10 rounded-full"
-              />
-              <span className="ml-2">{user.name}</span>
-            </div>
-          </li>
-          <li>
+        <ul className="menu menu-horizontal bg-base-200 rounded-box p-2 gap-4 place-items-center">
+          <li className="flex items-center">
             <button onClick={handleLogout} className="btn btn-primary">
               Logout
             </button>
