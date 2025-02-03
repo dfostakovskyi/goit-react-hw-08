@@ -40,7 +40,7 @@ export const SearchBox = () => {
   return (
     <div className="flex items-center flex-wrap place-content-center gap-2 mt-4">
       <p className="mb-0">Search for contacts by name or phone number</p>
-      <label className="input mt-0">
+      <label className="input mt-0 w-1/2">
         <svg
           className="h-[1em] opacity-50"
           xmlns="http://www.w3.org/2000/svg"

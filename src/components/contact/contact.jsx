@@ -16,27 +16,44 @@ const Contact = ({ contact }) => {
   };
 
   return (
-    <li className={styles.contactItem}>
-      <div className={styles.contactItemInfo}>
-        <div className={styles.contactDetails}>
+    <li className="card bg-base-100 w-96 shadow-sm">
+      <div className="card-body">
+        {/* Контейнер для імені */}
+        <div className="flex items-center space-x-3">
           <FaUser className={styles.icon} />
-          <p>{name}</p>
+          <p className="ml-3">{name}</p>
         </div>
-
-        <div className={styles.contactDetails}>
+        {/* Контейнер для номера телефону */}
+        <div className="flex items-center space-x-3 mt-3">
           <FaPhone className={styles.icon} />
-          <span>{number}</span>
+          <span className="ml-3">{number}</span>
+        </div>
+        {/* Контейнер для кнопок */}
+        <div className="card-actions justify-end">
+          <button
+            className="btn btn-error"
+            type="button"
+            onClick={handleDelete}
+          >
+            Delete
+          </button>
         </div>
       </div>
-      <button
-        type="button"
-        onClick={handleDelete}
-        className={styles.deleteButton}
-      >
-        Delete
-      </button>
     </li>
   );
 };
 
 export default Contact;
+
+<div className="card bg-base-100 w-96 shadow-sm">
+  <div className="card-body">
+    <h2 className="card-title">Card title!</h2>
+    <p>
+      A card component has a figure, a body part, and inside body there are
+      title and actions parts
+    </p>
+    <div className="card-actions justify-end">
+      <button className="btn btn-primary">Buy Now</button>
+    </div>
+  </div>
+</div>;

@@ -2,10 +2,12 @@
 
 import React, { useEffect, lazy, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import { refreshUserThunk } from "./redux/auth/operations";
 import { selectIsRefreshing } from "./redux/auth/selectors";
+import PrivateRoute from "./components/PrivateRoute";
+import RestrictedRoute from "./components/RestrictedRoute";
 import "./App.css";
 
 const HomePage = lazy(() => import("./paiges/homePage/HomePage"));
@@ -30,9 +32,31 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path="/register" element={<RegistrationPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/contacts" element={<ContactsPage />} />
+
+          {/* Публічні маршрути */}
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute
+                element={<RegistrationPage />}
+                redirectTo="/contacts"
+              />
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute element={<LoginPage />} redirectTo="/contacts" />
+            }
+          />
+
+          {/* Приватний маршрут */}
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute element={<ContactsPage />} redirectTo="/login" />
+            }
+          />
         </Route>
       </Routes>
     </Suspense>

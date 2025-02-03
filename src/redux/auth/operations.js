@@ -57,20 +57,28 @@ export const logoutThunk = createAsyncThunk(
 
       if (!token) {
         console.warn("⚠️ No token found. Skipping logout.");
-        return thunkApi.rejectWithValue("No token found");
+        // Все одно очищаємо стан навіть якщо токен відсутній
+      } else {
+        setAuthHeader(token);
+        await goitApi.post("users/logout");
       }
+    } catch (error) {
+      console.error("❌ Logout failed:", error);
 
-      setAuthHeader(token);
-      await goitApi.post("users/logout");
-
+      // Якщо помилка 401, все одно продовжуємо вихід
+      if (error.response && error.response.status === 401) {
+        console.warn("⚠️ Token is invalid or expired. Proceeding with logout.");
+      } else {
+        return thunkApi.rejectWithValue(error.message);
+      }
+    } finally {
       clearAuthHeader();
       removeToken();
 
-      return "Logged out";
-    } catch (error) {
-      console.error("❌ Logout failed:", error);
-      return thunkApi.rejectWithValue(error.message);
+      // Ви можете додати action для скидання стану тут, якщо потрібно
     }
+
+    return "Logged out";
   }
 );
 

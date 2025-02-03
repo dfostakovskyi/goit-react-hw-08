@@ -7,7 +7,9 @@ export const LoginForm = ({ handleSubmit }) => {
   return (
     <form onSubmit={handleSubmit}>
       <fieldset className="fieldset w-xs bg-base-200 border border-base-300 p-4 rounded-box">
-        <legend className="fieldset-legend">Login</legend>
+        <legend className="fieldset-legend text-center text-xl font-bold uppercase">
+          Login
+        </legend>
 
         <label className="fieldset-label">Email</label>
         <input
@@ -27,7 +29,7 @@ export const LoginForm = ({ handleSubmit }) => {
           required
         />
 
-        <button type="submit" className="btn btn-neutral mt-4">
+        <button type="submit" className="btn btn-outline btn-success mt-4">
           Login
         </button>
       </fieldset>

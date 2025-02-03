@@ -1,10 +1,8 @@
 // src\components\contactForm\ContactForm.jsx
 
-// src/components/contactForm/ContactForm.jsx
-
-import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/slice";
+import { useState } from "react";
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
@@ -46,6 +44,7 @@ export const ContactForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    e.stopPropagation(); // Stop event propagation
 
     const nameError = validateName(name);
     const numberError = validateNumber(number);
@@ -68,16 +67,15 @@ export const ContactForm = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto my-8">
+    <div className="max-w-3/4 mx-auto my-4">
       <form
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        className="bg-white shadow-md rounded  mb-4 px-6 pt-4 pb-6"
         onSubmit={onSubmit}
         noValidate
       >
-        <h2 className="text-2xl font-bold mb-6 text-center">Add New Contact</h2>
-        <div className="mb-4">
+        <div className="mb-4 flex flex-row items-center">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-gray-700 text-sm font-bold mb-2 mr-4 text-center"
             htmlFor="name"
           >
             Name
@@ -91,7 +89,7 @@ export const ContactForm = () => {
             pattern="[A-Za-z][A-Za-z0-9\-]*"
             minLength="3"
             maxLength="30"
-            title="Only letters, numbers, or dash"
+            title="Only letters, numbers or dash"
             id="name"
             name="name"
             value={name}
@@ -101,9 +99,9 @@ export const ContactForm = () => {
             <p className="text-red-500 text-xs italic mt-1">{errors.name}</p>
           )}
         </div>
-        <div className="mb-6">
+        <div className="mb-6 flex flex-row items-center">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2 "
+            className="block text-gray-700 text-sm font-bold mb-2 mr-4 text-center"
             htmlFor="number"
           >
             Phone Number
@@ -130,7 +128,7 @@ export const ContactForm = () => {
         <div className="flex items-center justify-center">
           <button
             type="submit"
-            className="btn rounded-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="btn rounded-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-1.5 px-3 rounded focus:outline-none focus:shadow-outline"
           >
             Add Contact
           </button>
