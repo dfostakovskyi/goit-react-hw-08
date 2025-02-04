@@ -7,7 +7,6 @@ const AlphabetSlider = ({
   selectedLetter,
   lettersWithContacts,
 }) => {
-  // Генеруємо масив літер англійського алфавіту від 'A' до 'Z'
   const letters = Array.from({ length: 26 }, (_, i) =>
     String.fromCharCode(65 + i)
   );

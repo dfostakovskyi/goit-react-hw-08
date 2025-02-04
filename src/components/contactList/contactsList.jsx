@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import _ from "lodash";
 import { selectContacts } from "../../redux/contacts/selectors";
 import { selectFilters } from "../../redux/contacts/selectors";
-import Contact from "../contact/Contact";
+import Contact from "../contact/contact";
 import AlphabetSlider from "../alphabetSlider/AlphabetSlider";
 import SearchBox from "../searchBox/SearchBox";
 
@@ -16,7 +16,6 @@ const ContactList = () => {
   const contactRefs = useRef({});
   const contactsContainerRef = useRef(null);
 
-  // Застосовуємо фільтри до контактів
   const filteredContacts = contacts.filter((contact) => {
     const { name, number } = contact;
     const { name: nameFilter, number: numberFilter } = filters;
@@ -34,12 +33,10 @@ const ContactList = () => {
     return matchesName && matchesNumber && matchesLetter;
   });
 
-  // Групуємо відфільтровані контакти за першою літерою
   const groupedContacts = _.groupBy(filteredContacts, (contact) =>
     contact.name.charAt(0).toUpperCase()
   );
 
-  // Отримуємо список літер, які мають контакти
   const lettersWithContacts = Object.keys(groupedContacts);
 
   const handleLetterSelect = (letter) => {
@@ -49,11 +46,10 @@ const ContactList = () => {
     }
   };
 
-  // Обробка кліку поза контейнером з контактами
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        selectedLetter && // Перевіряємо, чи вибрана літера
+        selectedLetter &&
         contactsContainerRef.current &&
         !contactsContainerRef.current.contains(event.target)
       ) {
@@ -70,7 +66,6 @@ const ContactList = () => {
 
   return (
     <div className="flex relative">
-      {/* Алфавітний слайдер */}
       <div className="absolute top-0 left-6 h-full w-[4rem] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-900 scrollbar-track-gray-100">
         <AlphabetSlider
           onSelectLetter={handleLetterSelect}
@@ -79,7 +74,6 @@ const ContactList = () => {
         />
       </div>
 
-      {/* Основний контент */}
       <div className="ml-[6rem] flex flex-col w-full">
         <SearchBox />
 
@@ -108,7 +102,7 @@ const ContactList = () => {
               </div>
             ))
           ) : (
-            <p>Контактів не знайдено.</p>
+            <p className="text-xl font-bold mt-4">No contacts found.</p>
           )}
         </div>
       </div>

@@ -23,6 +23,5 @@ export const selectUserContacts = createSelector(
   (user) => user.contacts
 );
 export const selectIsLoggedIn = (state) => {
-  console.log("Redux auth state:", state.auth);
   return state.auth.isLoggedIn;
 };

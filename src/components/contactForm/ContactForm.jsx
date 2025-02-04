@@ -44,7 +44,7 @@ export const ContactForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    e.stopPropagation(); // Stop event propagation
+    e.stopPropagation();
 
     const nameError = validateName(name);
     const numberError = validateNumber(number);
@@ -60,7 +60,6 @@ export const ContactForm = () => {
     };
     dispatch(addContact(newContact));
 
-    // Clear input fields and errors
     setName("");
     setNumber("");
     setErrors({});

@@ -1,7 +1,5 @@
 // src\redux\filters\slice.js
 
-// src/redux/filters/slice.js
-
 import { createSelector, createSlice, current } from "@reduxjs/toolkit";
 
 const filtersSlice = createSlice({
@@ -13,8 +11,6 @@ const filtersSlice = createSlice({
   reducers: {
     changeFilter(state, action) {
       const { field, value } = action.payload;
-      console.log("action.type:", action.type);
-      console.log("action.payload:", action.payload);
 
       if (field) {
         state[field] = value;
@@ -24,16 +20,6 @@ const filtersSlice = createSlice({
           action.payload
         );
       }
-
-      console.log(
-        "Стан після зміни:",
-        current(state),
-        "Поле:",
-        field,
-        "Значення:",
-        value,
-        "changeFilter"
-      );
     },
   },
 });

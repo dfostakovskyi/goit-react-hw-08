@@ -1,9 +1,9 @@
 // src/components/userMenu/UserMenu.jsx
 
-import { useRef } from "react";
-import { useState } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { themeChange } from "theme-change";
 import { logoutThunk } from "../../redux/auth/operations";
 import goitApi from "../../redux/auth/operations";
 import ContactForm from "../contactForm/ContactForm";
@@ -13,6 +13,10 @@ const UserMenu = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
   const modalRef = useRef(null);
+
+  useEffect(() => {
+    themeChange(false);
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -33,13 +37,43 @@ const UserMenu = () => {
   }
 
   return (
-    <div className="flex items-center gap-4 justify-center">
-      <div>Welcome, {user.name}!</div>
-      <input
-        type="checkbox"
-        value="synthwave"
-        className="toggle theme-controller"
-      />
+    <div className="relative flex items-center gap-4 justify-start flex-wrap max-w-full">
+      <div className="text-xl font-bold ">Welcome, {user.name}!</div>
+
+      <div className="grid grid-cols-2 gap-2 mt-2 mb-2">
+        <input
+          type="radio"
+          name="theme-dropdown"
+          className="theme-controller btn btn-xs btn-block btn-ghost justify-start"
+          aria-label="Default"
+          value="default"
+        />
+
+        <input
+          type="radio"
+          name="theme-dropdown"
+          className="theme-controller btn btn-xs btn-block btn-ghost justify-start"
+          aria-label="Cupcake"
+          value="cupcake"
+        />
+
+        <input
+          type="radio"
+          name="theme-dropdown"
+          className="theme-controller btn btn-xs btn-block btn-ghost justify-start"
+          aria-label="Dark"
+          value="dark"
+        />
+
+        <input
+          type="radio"
+          name="theme-dropdown"
+          className="theme-controller btn btn-xs btn-block btn-ghost justify-start"
+          aria-label="Light"
+          value="light"
+        />
+      </div>
+
       <nav>
         <ul className="menu menu-horizontal bg-base-200 rounded-box p-2 gap-4 place-items-center">
           <li className="flex items-center">

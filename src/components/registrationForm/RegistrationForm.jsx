@@ -121,7 +121,6 @@ export const RegistrationForm = ({ handleSubmit }) => {
   );
 };
 
-// Додавання валідації пропсів
 RegistrationForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
 };

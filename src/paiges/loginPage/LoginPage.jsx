@@ -22,7 +22,7 @@ const LoginPage = () => {
     dispatch(loginThunk(credentials))
       .unwrap()
       .then((response) => {
-        console.log("Login successful, token:", response.token);
+        console.log("Login successful:", response);
         navigate("/contacts");
       })
       .catch((error) => {

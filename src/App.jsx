@@ -66,4 +66,3 @@ export const App = () => {
 export default App;
 
 // RegistrationPage.jsx:40 User Data: {name: 'qwerty', email: 'qwerty5555555@mail.com', password: 'Qwerty123'}
-// RegistrationPage.jsx:55 API Response: {user: {…}, token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N…zMTV9.ct7jPXx0516qc9Adjty9pThm0oA6npmAPIloFx-uLkw'}

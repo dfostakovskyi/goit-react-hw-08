@@ -1,4 +1,5 @@
 // src\redux\contacts\selectors.js
+
 import { createSelector } from "@reduxjs/toolkit";
 
 const selectContactsState = (state) => state.contacts;
@@ -13,10 +14,8 @@ const selectFilteredContacts = createSelector(
   selectContacts,
   selectFilters,
   (contacts, filters) => {
-    console.log("Селектор selectFilteredContacts викликано");
     const { name, number } = filters;
 
-    // Нормалізуємо телефонний фільтр
     const normalizedFilterPhone = number ? number.replace(/\D/g, "") : "";
 
     return contacts.filter((contact) => {

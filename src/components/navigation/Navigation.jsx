@@ -13,7 +13,6 @@ const Navigation = () => {
         <li>
           <Link to="/contacts">Contacts</Link>
         </li>
-        {/* Додайте інші посилання за потреби */}
       </ul>
     </nav>
   );

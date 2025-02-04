@@ -1,1 +1,6 @@
-
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: lemonade --default, dark --prefersdark, light, cupcake, coffee,
+    synthwave;
+  exclude: rootscrollgutter, rootcolor;
+}
