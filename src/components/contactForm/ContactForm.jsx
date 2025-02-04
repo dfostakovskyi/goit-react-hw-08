@@ -1,17 +1,29 @@
 // src\components\contactForm\ContactForm.jsx
 
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/slice";
-import { useState } from "react";
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState("");
+
+  useEffect(() => {
+    if (successMessage) {
+      const timer = setTimeout(() => {
+        setSuccessMessage("");
+        console.log("Success message cleared");
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [successMessage]);
 
   const validateName = (value) => {
-    const pattern = /^[A-Za-z][A-Za-z0-9\-]*$/;
+    const pattern = /^[A-Za-z][A-Za-z0-9\- ]*$/;
     if (value.length < 3 || value.length > 30) {
       return "Must be 3 to 30 characters";
     } else if (!pattern.test(value)) {
@@ -54,21 +66,38 @@ export const ContactForm = () => {
       return;
     }
 
-    const newContact = {
-      name,
-      number,
-    };
+    const newContact = { name, number };
     dispatch(addContact(newContact));
 
     setName("");
     setNumber("");
     setErrors({});
+    setSuccessMessage("Your contact has been added successfully!");
+    console.log("Success message set");
   };
 
   return (
     <div className="max-w-3/4 mx-auto my-4">
+      {successMessage && (
+        <div role="alert" className="alert alert-success">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 shrink-0 stroke-current"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <span>{successMessage}</span>
+        </div>
+      )}
       <form
-        className="bg-white shadow-md rounded  mb-4 px-6 pt-4 pb-6"
+        className="bg-white shadow-md rounded mb-4 px-6 pt-4 pb-6"
         onSubmit={onSubmit}
         noValidate
       >
@@ -85,7 +114,7 @@ export const ContactForm = () => {
               errors.name ? "border-red-500" : "border-gray-300"
             } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
             placeholder="Enter name"
-            pattern="[A-Za-z][A-Za-z0-9\-]*"
+            pattern="[A-Za-z][A-Za-z0-9\- ]*"
             minLength="3"
             maxLength="30"
             title="Only letters, numbers or dash"
