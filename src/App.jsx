@@ -10,12 +10,12 @@ import PrivateRoute from "./components/PrivateRoute";
 import RestrictedRoute from "./components/RestrictedRoute";
 import "./App.css";
 
-const HomePage = lazy(() => import("./paiges/homePage/HomePage"));
+const HomePage = lazy(() => import("./pages/homePage/HomePage"));
 const RegistrationPage = lazy(() =>
-  import("./paiges/registrationPage/RegistrationPage")
+  import("./pages/registrationPage/RegistrationPage")
 );
-const LoginPage = lazy(() => import("./paiges/loginPage/LoginPage"));
-const ContactsPage = lazy(() => import("./paiges/contactsPage/ContactsPage"));
+const LoginPage = lazy(() => import("./pages/loginPage/LoginPage"));
+const ContactsPage = lazy(() => import("./pages/contactsPage/ContactsPage"));
 
 export const App = () => {
   const dispatch = useDispatch();

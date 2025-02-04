@@ -1,4 +1,4 @@
-// src/paiges/homePage/HomePage.jsx
+// src/pages/homePage/HomePage.jsx
 
 import { Link } from "react-router-dom";
 const Home = () => {

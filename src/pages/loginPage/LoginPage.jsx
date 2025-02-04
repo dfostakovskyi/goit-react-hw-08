@@ -1,4 +1,4 @@
-// src\paiges\loginPage\LoginPage.jsx
+// src\pages\loginPage\LoginPage.jsx
 
 import React from "react";
 import { useDispatch } from "react-redux";

@@ -1,4 +1,4 @@
-// src\paiges\registrationPage\RegistrationPage.jsx
+// src\pages\registrationPage\RegistrationPage.jsx
 
 import React from "react";
 import { useDispatch } from "react-redux";
